@@ -1,2 +1,2 @@
-# FINAL---LP2---Pipeline-LAPTOPS
-repositorio para la construcción de un sistema automatizado (ETL) que centralice información dispersa para realizar análisis estadísticos sobre la varianza de precios y detectar oportunidades de arbitraje o compra óptima en el mercado de laptops en el peru
+# FINAL---LP2---Pipeline-VUELOS
+repositorio para la construcción de un Pipeline ETL para el Análisis Comparativo de Precios y Variabilidad Temporal en Rutas Aéreas Comerciales mediante APIs
