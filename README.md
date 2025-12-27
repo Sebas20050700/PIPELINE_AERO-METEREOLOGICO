@@ -65,7 +65,8 @@ El sistema se basa en la triangulación de tres fuentes de verdad para evitar fa
 ```bash
 pip install pandas requests selenium webdriver-manager beautifulsoup4 geopy
 ```
-## Estructura
+
+### Estructura
 
 PROYECTO_AEREO_SENAMHI/
 │
