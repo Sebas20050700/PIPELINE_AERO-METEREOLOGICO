@@ -64,21 +64,30 @@ Archivos generados y gestionados en esta rama:
 ```text
 PROYECTO-AEREO-SENAMHI/
 │
-├── 📜 README.md                     # Tu documentación (se queda en la raíz)
-├── 📜 requirements.txt              # Tus librerías (¡corrige el nombre!, es requirements, no requeriments)
+├── README.md                       # Tu documentación
+├── requirements.txt                # Tus librerías
 │
-├── 📂 src/                          # SOURCE (Código Fuente)
-│   └── Scraping - SENAMHI.ipynb     # Tu notebook principal
+├── src/
+│   └── scraping/
+│       └── Scraping_SENAMHI.ipynb  # Tu notebook principal
 │
-├── 📂 data/                         # DATOS (El corazón del proyecto)
-│   ├── 📂 raw/                      # Datos crudos (Inputs)
+├── data/
+│   ├── raw/                        # Datos crudos (Inputs)
+│   │   ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv  <-- (CORREGIDO: Estaba aquí realmente)
 │   │   └── datos_crudos_senamhi.txt
 │   │
-│   └── 📂 processed/                # Datos procesados/generados (Outputs de tablas)
-│       ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv
+│   └── processed/                  # Datos procesados (Outputs)
+│       ├── SENAMHI_ESTACIONES_FINAL.csv        <-- (El resultado de tu scraping)
 │       ├── reporte_final_clasificado.csv
-│       └── reporte_nieve.csv
+│       ├── reporte_nieve.csv
+│       └── senamhi_clima_indicadores.csv
 │
+└── results/                        # RESULTADOS VISUALES
+    ├── maps/
+    │   └── MAPA_VALIDACION_RESULTADOS.html
+    └── figures/
+        └── GRAFICO_IMPACTO_CLIMATICO.png
+
 └── 📂 results/                      # RESULTADOS VISUALES (Evidencias)
     ├── MAPA_VALIDACION_RESULTADOS.html
     ├── debug_mapa.html
