@@ -30,3 +30,9 @@ El módulo genera un objeto de datos (DataFrame/CSV) con la siguiente estructura
 | **temp_celsius** | `Float` | Temperatura ambiente actual. | Validación cruzada vs. datos locales de SENAMHI. |
 | **viento_kmh** | `Float` | Velocidad del viento en km/h. | Análisis de impacto en la velocidad de las aeronaves. |
 | **condicion_global** | `String` | Descripción general del clima (Cloudy, Rain, etc). | Etiquetado y categorización del reporte final. |
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Instalación de dependencias
+
+| `pip install -r Requerimientos.txt` |
