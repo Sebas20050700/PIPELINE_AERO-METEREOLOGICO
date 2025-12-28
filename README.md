@@ -1,4 +1,4 @@
-# Módulo 2: SENAMHI (Captura en paralelo)
+# Módulo 3: SENAMHI (Captura en paralelo)
 ### Correlación Forense entre Fenómenos Atmosféricos y Eficiencia en Rutas Aéreas - Edición Perú
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue) ![Selenium](https://img.shields.io/badge/Selenium-Web%20Scraping-green) ![Folium](https://img.shields.io/badge/Folium-Geospatial_Viz-orange) ![Meteostat](https://img.shields.io/badge/Data-Meteostat_Historical-purple) ![Status](https://img.shields.io/badge/Status-Operational-brightgreen)
