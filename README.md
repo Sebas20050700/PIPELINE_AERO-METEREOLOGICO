@@ -1,67 +1,83 @@
 # ✈️ Pipeline de Análisis Aero-Meteorológico (Rama SENAMHI)
-### Correlación entre Fenómenos Atmosféricos y Eficiencia en Rutas Aéreas Comerciales - Edición Perú
+### Correlación Forense entre Fenómenos Atmosféricos y Eficiencia en Rutas Aéreas - Edición Perú
 
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![Selenium](https://img.shields.io/badge/Selenium-Web%20Scraping-green) ![SENAMHI](https://img.shields.io/badge/Data-SENAMHI%20Perú-red) ![Status](https://img.shields.io/badge/Status-Operational-brightgreen)
+![Python](https://img.shields.io/badge/Python-3.12-blue) ![Selenium](https://img.shields.io/badge/Selenium-Web%20Scraping-green) ![Folium](https://img.shields.io/badge/Folium-Geospatial_Viz-orange) ![Meteostat](https://img.shields.io/badge/Data-Meteostat_Historical-purple) ![Status](https://img.shields.io/badge/Status-Operational-brightgreen)
 
-## 📋 Descripción General
-Esta rama (**`feature/senamhi-integration`**) implementa un módulo de validación meteorológica de alta precisión diseñado específicamente para la orografía compleja del espacio aéreo peruano.
+## 📋 Descripción Técnica
+Esta rama (**`feature/senamhi-integration`**) constituye el núcleo de validación local del pipeline. A diferencia de las APIs globales que interpolan datos, este módulo implementa un enfoque de **"Ground Truth"** (Verdad en Tierra) específico para la orografía peruana.
 
-Sustituye la capa de validación genérica (EcoWeather) por una **integración directa y forense con el SENAMHI** (Servicio Nacional de Meteorología e Hidrología del Perú). Esto permite distinguir matemáticamente entre **Lluvia**, **Nieve** y **Helada** en los Andes, utilizando datos en tiempo real de estaciones terrestres y satélites GOES-19.
-
----
-
-## 🏗️ Arquitectura del Pipeline
-
-El sistema fusiona tres fuentes de datos independientes para validar la causa raíz de los retrasos aéreos:
-
-### 1. Tráfico Aéreo (OpenSky Network) 📡
-* **Función:** Telemetría en vivo.
-* **Detección:** Identifica patrones de espera (*holding patterns*), reducciones bruscas de velocidad y cambios de altitud no planificados.
-* **Cobertura:** Bounding Box del territorio peruano.
-
-### 2. Contexto General (Visual Crossing) ☁️
-* **Función:** Datos METAR sinópticos.
-* **Variables:** Viento (*Wind Speed/Gusts*), Visibilidad y condiciones generales para aeropuertos de origen/destino.
-
-### 3. Validación Local (Módulo Custom SENAMHI) 🏔️
-* **Función:** Capa de verificación de fenómenos extremos en tierra ("Ground Truth").
-* **Técnica:** Web Scraping Forense (Network Sniffing) y Análisis Vectorial Geoespacial.
+Realiza una **extracción forense** de datos ocultos del SENAMHI, audita la cobertura de estaciones y valida si las condiciones reportadas por satélites globales (Visual Crossing) coinciden con la realidad local (Neblina, Nieve, Helada).
 
 ---
 
-## 🔧 Implementación Técnica
+## 🔄 Flujo de Ejecución (Arquitectura Geocéntrica)
 
-### A. Minería de Datos Forense (Scraping)
-A diferencia de los métodos tradicionales, este pipeline no lee el HTML visible, sino que intercepta el tráfico de datos:
-* **Detector de API Oculta:** Utiliza `Selenium` para capturar las peticiones de red del mapa interactivo del SENAMHI.
-* **Extracción Regex:** Decodifica las estructuras JSON ocultas (`var data = [...]`) dentro de la respuesta del servidor.
-* **Resultado:** Generación automática de un **Maestro de Estaciones** con +1900 puntos de medición georreferenciados.
+El pipeline opera bajo una lógica secuencial de 3 etapas, donde la **Ubicación Geográfica** actúa como la llave maestra que conecta los módulos:
 
-### B. Algoritmo de Discriminación "Nieve vs. Lluvia"
-Para evitar falsos positivos en zonas andinas (donde una API global puede confundir lluvia fría con nieve), se aplica una lógica física:
+### 📍 ETAPA 1: Contexto Global (Visual Crossing)
+* **Input:** Nombre de Ciudad/Aeropuerto (ej. "Lima", "Cusco").
+* **Proceso:** Geolocalización y consulta de condiciones sinópticas.
+* **Output:** Coordenadas Maestras (`Lat: -12.02`, `Lon: -77.11`) y Viento General (`15 km/h`).
+* *Función:* Define el punto cero del análisis.
 
-```python
-# Lógica implementada en analisis_clima.py
-Si (Precipitación > 0 mm):
-    Si (Temperatura <= 2.0°C):
-        Estado = "❄️ NIEVE/HELADA" (Riesgo Alto: Cierre de Pista)
-    Sino:
-        Estado = "🌧️ LLUVIA LÍQUIDA" (Riesgo Moderado: Operación Estándar)
-```
+### ✈️ ETAPA 2: Realidad Operativa (OpenSky Network)
+* **Input:** Coordenadas Maestras de Etapa 1 (`-12.02, -77.11`).
+* **Proceso:** Escaneo de tráfico aéreo en un radio dinámico sobre ese punto.
+* **Output:** Telemetría de aeronaves (ID, Velocidad Vertical, Patrones de Espera).
+* *Función:* Detectar si la atmósfera está afectando realmente a los vuelos en esa zona.
 
-## 📂 Estructura del proyecto
+### 🏔️ ETAPA 3: Validación Local (Módulo SENAMHI)
+* **Input:** Coordenadas Maestras de Etapa 1 (`-12.02, -77.11`).
+* **Proceso:**
+    1.  Búsqueda de la estación SENAMHI real más cercana (Cálculo Haversine).
+    2.  Extracción de datos de sensores locales (no satelitales).
+* **Output Final:** Confirmación de Fenómeno Crítico (ej. **"¿Hay Neblina densa?"**, **"¿Es Nieve o Lluvia?"**).
+* *Función:* Juez final que confirma o descarta la causa meteorológica.
+
+---
+
+## 🔧 Implementación Técnica del Módulo SENAMHI
+
+### 1. Ingesta Forense (Web Scraping & Regex) 🕵️‍♂️
+El sistema extrae datos que no son públicos vía API, atacando directamente el código fuente del mapa oficial.
+* **Técnica:** Escaneo de patrones dentro del HTML renderizado usando Expresiones Regulares (`Regex`).
+* **Patrón de Extracción:**
+    ```python
+    regex = r'"nom"\s*:\s*"(.*?)".*?"lat"\s*:\s*(-?\d+\.?\d*).*?"lon"\s*:\s*(-?\d+\.?\d*)'
+    ```
+
+### 2. Algoritmo de Discriminación "Nieve vs. Lluvia" ❄️
+Para resolver el problema de la "Nieve Fantasma" en los Andes, se aplica una lógica física sobre los datos:
+* Si `Precipitación > 0` y `Temperatura <= 1.0°C` ➡️ **❄️ NIEVE (Riesgo Alto)**.
+* Si `Precipitación > 0` y `Temperatura > 3.0°C` ➡️ **🌧️ LLUVIA (Riesgo Medio)**.
+
+### 3. Visualización de Cobertura (Folium) 🗺️
+Genera mapas interactivos para validar la confianza del dato.
+* **Elementos:** Marcador de Referencia (Rojo) + Estación SENAMHI (Verde) + Radio de Confianza (5km).
+
+---
+
+## 📂 Estructura del Proyecto
+
+Archivos generados y gestionados en esta rama:
 
 ```text
 PROYECTO_AEREO_SENAMHI/
 │
-├── README.md                     # Documentación técnica       
+├── README.md                          # Documentación del flujo
 │
-├── src/                          # Código fuente
-│   ├── detectar_api_oculta.py    # Sniffer de red
-│   ├── analisis_clima.py         # Lógica de negocio
-│   └── visualizador.py           # Dashboard
+├── Scraping - SENAMHI.ipynb           # CÓDIGO PRINCIPAL (Etapa 3 + Lógica)
 │
-└── data/                         # Gestión de datos
-    └── output/
-        └── reporte_final.csv
-```
+├── data/
+│   ├── raw/
+│   │   └── datos_crudos_senamhi.txt        # Input simulado para pruebas de nieve
+│   │
+│   └── output/
+│       ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv  # Base de datos de estaciones (+900 registros)
+│       ├── reporte_nieve.csv                   # Detección de eventos fríos
+│       ├── reporte_final_clasificado.csv       # Dataset etiquetado
+│       └── senamhi_clima_indicadores.csv       # Indicadores operativos
+│
+└── evidence/
+    ├── MAPA_VALIDACION_RESULTADOS.html     # Mapa interactivo de auditoría (Folium)
+    └── GRAFICO_IMPACTO_CLIMATICO.png       # Visualización estática
