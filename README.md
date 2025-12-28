@@ -62,22 +62,24 @@ Genera mapas interactivos para validar la confianza del dato.
 Archivos generados y gestionados en esta rama:
 
 ```text
-PROYECTO_AEREO_SENAMHI/
+PROYECTO-AEREO-SENAMHI/
 │
-├── README.md                          # Documentación del flujo
+├── 📜 README.md                     # Tu documentación (se queda en la raíz)
+├── 📜 requirements.txt              # Tus librerías (¡corrige el nombre!, es requirements, no requeriments)
 │
-├── Scraping - SENAMHI.ipynb           # CÓDIGO PRINCIPAL (Etapa 3 + Lógica)
+├── 📂 src/                          # SOURCE (Código Fuente)
+│   └── Scraping - SENAMHI.ipynb     # Tu notebook principal
 │
-├── data/
-│   ├── raw/
-│   │   └── datos_crudos_senamhi.txt        # Input simulado para pruebas de nieve
+├── 📂 data/                         # DATOS (El corazón del proyecto)
+│   ├── 📂 raw/                      # Datos crudos (Inputs)
+│   │   └── datos_crudos_senamhi.txt
 │   │
-│   └── output/
-│       ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv  # Base de datos de estaciones (+900 registros)
-│       ├── reporte_nieve.csv                   # Detección de eventos fríos
-│       ├── reporte_final_clasificado.csv       # Dataset etiquetado
-│       └── senamhi_clima_indicadores.csv       # Indicadores operativos
+│   └── 📂 processed/                # Datos procesados/generados (Outputs de tablas)
+│       ├── MAESTRO_ESTACIONES_SENAMHI_GEO.csv
+│       ├── reporte_final_clasificado.csv
+│       └── reporte_nieve.csv
 │
-└── evidence/
-    ├── MAPA_VALIDACION_RESULTADOS.html     # Mapa interactivo de auditoría (Folium)
-    └── GRAFICO_IMPACTO_CLIMATICO.png       # Visualización estática
+└── 📂 results/                      # RESULTADOS VISUALES (Evidencias)
+    ├── MAPA_VALIDACION_RESULTADOS.html
+    ├── debug_mapa.html
+    └── GRAFICO_IMPACTO_CLIMATICO.png
