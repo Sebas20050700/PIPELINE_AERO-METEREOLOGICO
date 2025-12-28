@@ -22,3 +22,11 @@ Este módulo constituye la Etapa 1 del Pipeline. Su función principal es actuar
 ## Estructura de Salida (Contrato de Datos)
 
 El módulo genera un objeto de datos (DataFrame/CSV) con la siguiente estructura, sirviendo como llave primaria (`aeropuerto_id`) para el _Merge_ final:
+
+| Columna | Tipo | Descripción | Uso en el Pipeline |
+| :--- | :--- | :--- | :--- |
+| **aeropuerto_id** | `String` | Código ICAO del aeropuerto (Ej: SPJC). | **Primary Key** para la unión de tablas. |
+| **lat / lon** | `Float` | Coordenadas decimales del aeródromo. | Insumo geográfico para **OpenSky** y **SENAMHI**. |
+| **temp_celsius** | `Float` | Temperatura ambiente actual. | Validación cruzada vs. datos locales de SENAMHI. |
+| **viento_kmh** | `Float` | Velocidad del viento en km/h. | Análisis de impacto en la velocidad de las aeronaves. |
+| **condicion_global** | `String` | Descripción general del clima (Cloudy, Rain, etc). | Etiquetado y categorización del reporte final. |
