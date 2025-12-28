@@ -54,15 +54,14 @@ Si (Precipitación > 0 mm):
 ```text
 PROYECTO_AEREO_SENAMHI/
 │
-├── README.md                     # Documentación técnica
-├── requirements.txt              # Dependencias
+├── README.md                     # Documentación técnica       
 │
-├── src/                          # CÓDIGO FUENTE
+├── src/                          # Código fuente
 │   ├── detectar_api_oculta.py    # Sniffer de red
 │   ├── analisis_clima.py         # Lógica de negocio
 │   └── visualizador.py           # Dashboard
 │
-└── data/                         # GESTIÓN DE DATOS
+└── data/                         # Gestión de datos
     └── output/
         └── reporte_final.csv
 ```
