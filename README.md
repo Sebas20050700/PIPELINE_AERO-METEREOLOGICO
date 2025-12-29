@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🛫 Pipeline de Análisis de Correlación Aero-Meteorológica
 ### Impacto de Fenómenos Atmosféricos en la Eficiencia de Rutas Comerciales en Perú
 
