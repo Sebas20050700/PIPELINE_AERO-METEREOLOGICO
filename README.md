@@ -1,38 +1,15 @@
-# Módulo 3: SENAMHI (Captura en paralelo)
-### Correlación Forense entre Fenómenos Atmosféricos y Eficiencia en Rutas Aéreas - Edición Perú
+# 🏔️ MÓDULO 3: SENAMHI — Validación Forense Metereológica  
+## *Ground Truth Local para Operaciones Aéreas en Perú*
 
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![Selenium](https://img.shields.io/badge/Selenium-Web%20Scraping-green) ![Folium](https://img.shields.io/badge/Folium-Geospatial_Viz-orange) ![Meteostat](https://img.shields.io/badge/Data-Meteostat_Historical-purple) ![Status](https://img.shields.io/badge/Status-Operational-brightgreen)
-
-## 📋 Descripción Técnica
-Esta rama (**`feature/senamhi-integration`**) constituye el núcleo de validación local del pipeline. A diferencia de las APIs globales que interpolan datos, este módulo implementa un enfoque de **"Ground Truth"** (Verdad en Tierra) específico para la orografía peruana.
-
-Realiza una **extracción forense** de datos ocultos del SENAMHI, audita la cobertura de estaciones y valida si las condiciones reportadas por satélites globales (Visual Crossing) coinciden con la realidad local (Neblina, Nieve, Helada).
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Status](https://img.shields.io/badge/Status-Operational-brightgreen)
+![Role](https://img.shields.io/badge/Role-Ground%20Truth-red)
 
 ---
 
-## 🔄 Flujo de Ejecución (Arquitectura Geocéntrica)
+## 🎯 PROPÓSITO DEL MÓDULO
 
-El pipeline opera bajo una lógica secuencial de 3 etapas, donde la **Ubicación Geográfica** actúa como la llave maestra que conecta los módulos:
-
-### 📍 ETAPA 1: Contexto Global (Visual Crossing)
-* **Input:** Nombre de Ciudad/Aeropuerto (ej. "Lima", "Cusco").
-* **Proceso:** Geolocalización y consulta de condiciones sinópticas.
-* **Output:** Coordenadas Maestras (`Lat: -12.02`, `Lon: -77.11`) y Viento General (`15 km/h`).
-* *Función:* Define el punto cero del análisis.
-
-### ✈️ ETAPA 2: Realidad Operativa (OpenSky Network)
-* **Input:** Coordenadas Maestras de Etapa 1 (`-12.02, -77.11`).
-* **Proceso:** Escaneo de tráfico aéreo en un radio dinámico sobre ese punto.
-* **Output:** Telemetría de aeronaves (ID, Velocidad Vertical, Patrones de Espera).
-* *Función:* Detectar si la atmósfera está afectando realmente a los vuelos en esa zona.
-
-### 🏔️ ETAPA 3: Validación Local (Módulo SENAMHI)
-* **Input:** Coordenadas Maestras de Etapa 1 (`-12.02, -77.11`).
-* **Proceso:**
-    1.  Búsqueda de la estación SENAMHI real más cercana (Cálculo Haversine).
-    2.  Extracción de datos de sensores locales (no satelitales).
-* **Output Final:** Confirmación de Fenómeno Crítico (ej. **"¿Hay Neblina densa?"**, **"¿Es Nieve o Lluvia?"**).
-* *Función:* Juez final que confirma o descarta la causa meteorológica.
+El **Módulo SENAMHI** constituye la capa de verificación física y final del pipeline. Su función principal es actuar como un **validador de verdad de terreno (Ground Truth)**, contrastando las lecturas satelitales globales y la telemetría aérea con la red nacional de estaciones meteorológicas terrestres. Este módulo es el encargado de reducir la incertidumbre climática provocada por la compleja geografía peruana, confirmando si un riesgo detectado remotamente tiene una base física real en la superficie antes de emitir una alerta crítica.
 
 ---
 
