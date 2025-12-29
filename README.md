@@ -55,4 +55,20 @@ El sistema se basa en la triangulación de tres fuentes de verdad para evitar fa
 * **Resultado:** Dataset consolidado para análisis de toma de decisiones.
     > **Ejemplo de Salida:** "El vuelo LA2023 (OpenSky) redujo velocidad un 20% en aproximación. Visual Crossing reportó visibilidad reducida, y SENAMHI confirmó alerta de nevada severa en la estación Granja Kcayra".
 
+## 🗂️ Estructura del Repositorio
 
+El proyecto se organiza de forma modular para permitir el escalamiento independiente de cada motor de extracción:
+
+```text
+PIPELINE_AERO-METEREOLOGICO/
+├── dashboard/          # Visualización de métricas y estados operativos
+├── data/               # Almacenamiento de datasets
+│   ├── processed/      # Datos finales normalizados (CSV)
+│   └── raw/            # Ingesta bruta de APIs y estaciones
+├── images/             # Documentación de procesos y diagramas BPMN
+├── maps/               # Mapas interactivos de validación de vuelo (HTML)
+├── notebooks/          # Notebooks de desarrollo y pruebas (Colab)
+├── src/                # Scripts fuente del proceso ETL
+├── README.md           # Documentación maestra
+└── requirements.txt    # Librerías y dependencias del sistema
+```
