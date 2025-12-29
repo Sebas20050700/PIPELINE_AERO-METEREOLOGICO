@@ -1,3 +1,20 @@
-# Dependencias del Pipeline - Etapa 1
-requests>=2.28.0
+# --- API & Conexión ---
+pyopensky>=1.2.0
+python-dotenv>=1.0.0
+
+# --- Procesamiento Geoespacial ---
+geopy>=2.3.0
+pyproj>=3.4.0
+shapely>=2.0.0
+
+# --- Análisis y Matemáticas ---
 pandas>=1.5.0
+numpy>=1.23.0
+scipy>=1.9.0
+
+# --- Tiempo y Utilidades ---
+pytz>=2022.1
+tqdm>=4.64.0
+
+# --- Visualización ---
+folium>=0.14.0
