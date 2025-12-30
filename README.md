@@ -7,7 +7,7 @@
 
 ---
 
-## 🎯 PROPÓSITO DEL MÓDULO
+## 🎯 Propósito del módulo
 
 El **Módulo SENAMHI** constituye la capa de verificación física y final del pipeline. Su función principal es actuar como un **validador de verdad de terreno (Ground Truth)**, contrastando las lecturas satelitales globales y la telemetría aérea con la red nacional de estaciones meteorológicas terrestres. Este módulo es el encargado de reducir la incertidumbre climática provocada por la compleja geografía peruana, confirmando si un riesgo detectado remotamente tiene una base física real en la superficie antes de emitir una alerta crítica.
 
