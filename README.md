@@ -1,4 +1,4 @@
-# Módulo 1: Visual Crossing Weather Engine (Ingesta Base)
+## Módulo 1: Visual Crossing Weather Engine (Ingesta Base)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## Descripción
 Este módulo constituye la Etapa 1 del Pipeline. Su función principal es actuar como el orquestador geográfico del sistema. A partir de códigos aeronáuticos (ICAO/IATA), el motor resuelve la ubicación exacta y proporciona el contexto meteorológico global necesario para disparar los procesos de rastreo aéreo y validación local.
