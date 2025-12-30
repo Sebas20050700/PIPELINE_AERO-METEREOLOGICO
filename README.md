@@ -1,4 +1,4 @@
-## MÓDULO 3: SENAMHI — Validación Forense Metereológica  
+## Módulo 3: SENAMHI — Validación Forense Metereológica  
 ## *Ground Truth Local para Operaciones Aéreas en Perú*
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
